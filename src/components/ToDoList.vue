@@ -1,9 +1,9 @@
 <template>
-    <div>
+    <div class="main">
         <div v-for="todo in todos" :key="todo">
             <label>
             <input type="checkbox" v-model="todo.done">
-            <input v-model="todo.text" v-bind:class="{donestyle:todo.done}">
+            <input v-model="todo.text" v-bind:class="{donestyle:todo.done}" placeholder="例）算数ドリル">
             <p v-if="todo.done">お疲れさまでした！よく頑張りましたね</p>
             </label>
         </div>
@@ -22,7 +22,7 @@ export default {
             todos:[
             {done:false,text:''},
             {done:false,text:''},
-            {done:false,text:''}
+            {done:false,text:''},
         ]
         }
     },
@@ -54,4 +54,9 @@ export default {
         text-decoration: line-through;
         color: lightgray;
     }
+    .main{
+        margin: auto;
+        text-align: center;
+    }
+    
 </style>

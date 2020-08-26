@@ -18,3 +18,13 @@ export default {
   }
 }
 </script>
+<style scoped>
+  h2{
+    margin: auto;
+    text-align: center;
+  }
+  p{
+    margin: auto;
+    text-align: center;
+  }
+</style>
