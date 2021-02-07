@@ -13,5 +13,56 @@
     </noscript>
     <div id="app"></div>
     <!-- built files will be auto injected -->
+      <!-- Load Stripe.js on your website. -->
+<script src="https://js.stripe.com/v3"></script>
+
+<!-- Create a button that your customers click to complete their purchase. Customize the styling to suit your branding. -->
+<button
+  style="background-color:#6772E5;color:#FFF;padding:8px 12px;border:0;border-radius:4px;font-size:1em"
+  id="checkout-button-price_1IHgtnB6w0voAZLuS6RdJ6yO"
+  role="link"
+  type="button"
+>
+  Checkout
+</button>
+
+<div id="error-message"></div>
+
+<script>
+(function() {
+  var stripe = Stripe('pk_test_51IHMfdB6w0voAZLuI4ix9R5D7c1YuIoHuk3B3Z3s63if85mRuqJ1llH2dX8VZO4dFxw2JpGQYCM0KEBQTkqMKY0f00GgVZic8m');
+
+  var checkoutButton = document.getElementById('checkout-button-price_1IHgtnB6w0voAZLuS6RdJ6yO');
+  checkoutButton.addEventListener('click', function () {
+    /*
+     * When the customer clicks on the button, redirect
+     * them to Checkout.
+     */
+    stripe.redirectToCheckout({
+      lineItems: [{price: 'price_1IHgtnB6w0voAZLuS6RdJ6yO', quantity: 1}],
+      mode: 'subscription',
+      /*
+       * Do not rely on the redirect to the successUrl for fulfilling
+       * purchases, customers may not always reach the success_url after
+       * a successful payment.
+       * Instead use one of the strategies described in
+       * https://stripe.com/docs/payments/checkout/fulfill-orders
+       */
+      successUrl: 'https://priceless-tereshkova-412797.netlify.app',
+      cancelUrl: 'https://priceless-tereshkova-412797.netlify.app',
+    })
+    .then(function (result) {
+      if (result.error) {
+        /*
+         * If `redirectToCheckout` fails due to a browser or network
+         * error, display the localized error message to your customer.
+         */
+        var displayError = document.getElementById('error-message');
+        displayError.textContent = result.error.message;
+      }
+    });
+  });
+})();
+</script>
   </body>
 </html>
